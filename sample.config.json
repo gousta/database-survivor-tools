@@ -1,10 +1,11 @@
 {
     "backup": {
-        "history": 7,
+        "max": 7,
         "ssh": "<username>@<host.com>",
         "destination": "/path/to/backups/directory"
     },
-    "pg": {
+    "db": {
+        "type": "postgres",
         "host": "",
         "database": "",
         "schema": "",

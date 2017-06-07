@@ -13,7 +13,6 @@ datetime = time.strftime('%Y%m%d%H%M')
 
 # CLEAN TMP DIRECTORY
 os.popen("rm -f %s/*" % (tmpPath))
-print("Cleaned tmp directory")
 
 # EXPORT TO FILE
 if config["db"]["type"] == "postgres":
