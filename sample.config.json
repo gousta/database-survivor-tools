@@ -1,0 +1,15 @@
+{
+    "backup": {
+        "history": 7,
+        "ssh": "<username>@<host.com>",
+        "destination": "/path/to/backups/directory"
+    },
+    "pg": {
+        "host": "",
+        "database": "",
+        "schema": "",
+        "user": "",
+        "password": ""
+    },
+    "commands": ""
+}
