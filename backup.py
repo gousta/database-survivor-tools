@@ -29,8 +29,8 @@ print("Pushing to: %s" % (config["backup"]["destination"]))
 os.popen("scp %s/%s %s:%s/%s" % (tmpPath, filename, config["backup"]["ssh"], config["backup"]["destination"], filename))
 print("Saved backup in: %s/%s" % (config["backup"]["destination"], filename))
 
-# CREATE DESTINATION PATH
-os.popen("ssh -oStrictHostKeyChecking=no -oCheckHostIP=no %s \"cd %s; ls -tp | grep -v '/$' | tail -n +%d | xargs -I {} rm -- {}\"" % (config["backup"]["ssh"], config["backup"]["destination"], config["backup"]["history"] + 1))
+# CLEAN BACKUPS OLDER THAN MAX (HISTORY)
+os.popen("ssh -oStrictHostKeyChecking=no -oCheckHostIP=no %s \"cd %s; ls -tp | grep -v '/$' | tail -n +%d | xargs -I {} rm -- {}\"" % (config["backup"]["ssh"], config["backup"]["destination"], config["backup"]["max"] + 1))
 print("Performed cleanup")
 
 print("Backup complete!")
