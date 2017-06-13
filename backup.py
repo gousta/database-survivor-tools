@@ -21,7 +21,7 @@ if config["db"]["type"] == "postgres":
     os.popen("%s pg_dump -Fc -x -h %s -U %s -n %s -v %s -f %s/%s" % (pwd, config["db"]["host"], config["db"]["user"], config["db"]["schema"], config["db"]["database"], tmpPath, filename))
 elif config["db"]["type"] == "mysql":
     filename = "%s.%s.sql" % (config["db"]["database"], datetime)
-    os.popen("mysqldump --opt --protocol=TCP --host=%s --user=%s --password=\"%s\" %s > %s/%s" % (config["db"]["host"], config["db"]["user"], config["db"]["password"], config["db"]["database"], tmpPath, filename))
+    os.popen("mysqldump --host=%s --user=%s --password=\"%s\" %s > %s/%s" % (config["db"]["host"], config["db"]["user"], config["db"]["password"], config["db"]["database"], tmpPath, filename))
 else:
     print("Configuration database type is not supported. Supported values are `postgres` and `mysql`")
     sys.exit()
