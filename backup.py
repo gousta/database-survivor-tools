@@ -9,18 +9,18 @@ scriptPath = os.path.dirname(os.path.realpath(__file__))
 tmpPath = "%s/%s" % (scriptPath, TMP)
 config = json.load(open("%s/config.json" % (scriptPath)))
 
-datetime = time.strftime('%Y%m%d%H%M')
+datetime = time.strftime('%Y_%m_%d_%H_%M')
 
 # CLEAN TMP DIRECTORY
 os.popen("rm -f %s/*" % (tmpPath))
 
 # EXPORT TO FILE
 if config["db"]["type"] == "postgres":
-    filename = "%s.%s.%s.dump" % (config["db"]["database"], config["db"]["schema"], datetime)
+    filename = "%s.dump" % (datetime)
     pwd = 'PGPASSWORD="%s"' % config["db"]["password"]
     os.popen("%s pg_dump -Fc -x -h %s -U %s -n %s -v %s -f %s/%s" % (pwd, config["db"]["host"], config["db"]["user"], config["db"]["schema"], config["db"]["database"], tmpPath, filename))
 elif config["db"]["type"] == "mysql":
-    filename = "%s.%s.sql" % (config["db"]["database"], datetime)
+    filename = "%s.sql" % (datetime)
     os.popen("mysqldump --host=%s --user=%s --password=\"%s\" %s > %s/%s" % (config["db"]["host"], config["db"]["user"], config["db"]["password"], config["db"]["database"], tmpPath, filename))
 else:
     print("Configuration database type is not supported. Supported values are `postgres` and `mysql`")
