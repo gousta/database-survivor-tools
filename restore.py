@@ -11,7 +11,7 @@ config = json.load(open("%s/config.json" % (scriptPath)))
 # CLEAN TMP DIRECTORY
 os.popen("rm -f %s/*" % (tmpPath))
 
-filename = os.popen("ssh -oStrictHostKeyChecking=no -oCheckHostIP=no %s \"ls %s | sort -V | tail -n 1\"" % (config["backup"]["ssh"], config["backup"]["destination"])).read()
+filename = os.popen("ssh -oStrictHostKeyChecking=no -oCheckHostIP=no %s \"ls %s -tr | tail -n 1\"" % (config["backup"]["ssh"], config["backup"]["destination"])).read()
 filename = filename.strip()
 
 print("Downloading backup file: %s/%s" % (config["backup"]["destination"], filename))
